@@ -1,4 +1,6 @@
 import React from 'react';
+//actions
+import { newProductAction } from '../actions/productAction';
 
 export const NuevoProducto = () => {
 	return (
