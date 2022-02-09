@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 //actions
 import { newProductAction } from '../actions/productAction';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
-export const NuevoProducto = () => {
+export const NuevoProducto = ({ history }) => {
 	const [product, setProduct] = useState({
 		name: '',
 		price: 0
 	});
 	const dispatch = useDispatch();
+
+	const loading = useSelector((state) => state.products.loading);
+	const error = useSelector((state) => state.products.error);
 
 	const handleProduct = (e) => {
 		setProduct({ ...product, [e.target.name]: e.target.value });
@@ -17,8 +21,19 @@ export const NuevoProducto = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
+		if (product.name === '' || product.price <= 0) {
+			Swal.fire({
+				title: 'Datos no validos',
+				text: 'Los datos del formulario no son validos, por favor revisalos.',
+				icon: 'error'
+			});
+			return;
+		}
+
 		product.price = Number(product.price);
 		dispatch(newProductAction(product));
+
+		history.push('/');
 	};
 
 	return (
@@ -54,6 +69,9 @@ export const NuevoProducto = () => {
 								Agregar
 							</button>
 						</form>
+
+						{loading ? <p className="alert alert-info text-center mt-3">Cargando...</p> : null}
+						{error ? <p className="alert alert-danger text-center mt-3">Ocurrió un error</p> : null}
 					</div>
 				</div>
 			</div>
