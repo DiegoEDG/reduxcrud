@@ -1,19 +1,19 @@
 {
   "productos": [
     {
-      "name": "Pizza",
-      "price": 200,
-      "id": 6
-    },
-    {
-      "name": "Atún",
-      "price": 100,
-      "id": 7
-    },
-    {
       "name": "Salmón",
       "price": 500,
       "id": 8
+    },
+    {
+      "name": "Atún",
+      "price": 150,
+      "id": 9
+    },
+    {
+      "name": "Pizza",
+      "price": 200,
+      "id": 10
     }
   ]
 }
